@@ -10,7 +10,7 @@ export default function App() {
         <Box height="4rem">
           <Flex align="center" gap="5" height="100%">
             <Heading as="h1" size="8" weight="light">
-              Kanban
+              Kanban2
             </Heading>
             <CreateTaskForm />
           </Flex>
