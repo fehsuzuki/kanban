@@ -8,12 +8,15 @@ import {
   Button,
 } from '@radix-ui/themes';
 import { Task, TaskPriority, TaskStatus } from '../entities/Task';
+import { useTasks } from '../hooks/useTasks';
 
 interface TaskCardProps {
   task: Task;
 }
 
 export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+  const {deleteTask, updateTask} = useTasks()
+
   const getPriorityColor = (priority: TaskPriority) => {
     const priorityColors: { [key: string]: 'sky' | 'amber' | 'tomato' } = {
       low: 'sky',
@@ -44,6 +47,33 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     return actionColors[status];
   };
 
+  const handleDelete = (id: string) => {
+    const confirmation = confirm("Confirm to delete this task")
+
+    if(confirmation) {
+      deleteTask(id)
+    }
+  }
+
+  const handleUpdate = (id: string) => {
+    const confirmation = confirm("Confirm to update this task")
+
+    switch(task.status) {
+      case "todo":
+        if(confirmation) {
+          updateTask(id, {status: "inprogress"})
+        }
+
+        break
+
+      case "inprogress":
+        if(confirmation) {
+          updateTask(id, {status: "done"})
+        }
+        break
+    }
+  }
+
   return (
     <Card>
       <Flex align="center" gap="4">
@@ -62,11 +92,12 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           <Button
             color={getActionColor(task.status)}
             style={{ cursor: 'pointer' }}
+            onClick={() => handleUpdate(task.id)}
           >
             {getActionText(task.status)}
           </Button>
         )}
-        <Button color="red" style={{ cursor: 'pointer' }}>
+        <Button color="red" style={{ cursor: 'pointer' }} onClick={() => handleDelete(task.id)}>
           Delete
         </Button>
       </Flex>
