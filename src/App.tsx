@@ -12,7 +12,6 @@ export default function App() {
             <Heading as="h1" size="8" weight="light">
               Kanban
             </Heading>
-            <CreateTaskForm />
           </Flex>
         </Box>
         <Box>

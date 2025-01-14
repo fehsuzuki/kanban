@@ -2,6 +2,7 @@ import { Badge, Flex, Grid, ScrollArea } from '@radix-ui/themes';
 import { Task } from '../entities/Task';
 import { TaskCard } from './TaskCard';
 import { useTasks } from '../hooks/useTasks';
+import { CreateTaskForm } from './CreateTaskForm';
 
 export const TaskBoard: React.FC = () => {
   const {tasks} = useTasks()
@@ -18,7 +19,10 @@ export const TaskBoard: React.FC = () => {
       <Grid columns="3" gap="4" minWidth="64rem" mt="3">
         <Flex direction="column" gap="4">
           <Badge size="3" color="gray">
-            To do ({tasksTodo.length})
+            <Flex direction={"row"} justify={"between"} align={"center"} width={"100%"}>
+              To do ({tasksTodo.length})
+              <CreateTaskForm/>
+            </Flex>
           </Badge>
           {tasksTodo.map((task) => (
             <TaskCard key={task.id} task={task} />
@@ -27,7 +31,10 @@ export const TaskBoard: React.FC = () => {
 
         <Flex direction="column" gap="4">
           <Badge size="3" color="yellow">
-            In progress ({tasksInProgress.length})
+            <Flex direction={"row"} justify={"between"} align={"center"} width={"100%"}>
+              In progress ({tasksInProgress.length})
+              <CreateTaskForm />
+            </Flex>
           </Badge>
           {tasksInProgress.map((task) => (
             <TaskCard key={task.id} task={task} />
@@ -36,7 +43,10 @@ export const TaskBoard: React.FC = () => {
 
         <Flex direction="column" gap="4">
           <Badge size="3" color="green">
-            Done ({tasksDone.length})
+            <Flex direction={"row"} justify={"between"} align={"center"} width={"100%"}>
+              Done ({tasksDone.length})
+              <CreateTaskForm />
+            </Flex>
           </Badge>
           {tasksDone.map((task) => (
             <TaskCard key={task.id} task={task} />

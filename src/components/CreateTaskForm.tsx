@@ -52,7 +52,7 @@ export const CreateTaskForm: React.FC = () => {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
         <Button style={{ cursor: 'pointer' }}>
-          New Task <PlusIcon />
+          <PlusIcon />
         </Button>
       </Dialog.Trigger>
 

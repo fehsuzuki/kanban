@@ -9,6 +9,7 @@ import {
 } from '@radix-ui/themes';
 import { Task, TaskPriority, TaskStatus } from '../entities/Task';
 import { useTasks } from '../hooks/useTasks';
+import { Pencil2Icon } from '@radix-ui/react-icons';
 
 interface TaskCardProps {
   task: Task;
@@ -76,11 +77,14 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
   return (
     <Card>
-      <Flex align="center" gap="4">
-        <Heading as="h3" weight="bold" size="3">
-          {task.title}
-        </Heading>
-        <Badge color={getPriorityColor(task.priority)}>{task.priority}</Badge>
+      <Flex justify="between">
+        <Flex align="center" gap="4">
+          <Heading as="h3" weight="bold" size="3">
+            {task.title}
+          </Heading>
+          <Badge color={getPriorityColor(task.priority)}>{task.priority}</Badge>
+        </Flex>
+        <Pencil2Icon style={{cursor:"pointer"}}></Pencil2Icon>
       </Flex>
 
       <Box mt="4">
