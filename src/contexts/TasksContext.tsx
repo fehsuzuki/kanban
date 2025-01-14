@@ -4,7 +4,7 @@ import { tasksService } from "../services/api";
 
 export interface TasksContextData {
     tasks: Task[],
-    createTask: (attributes: Omit<Task, "id">) => Promise<Task>
+    createTask: (attributes: Omit<Task, "id">) => Promise<void>
     updateTask: (id: number, attributes: Partial<Omit<Task, "id">>) => Promise<void>
     deleteTask: (id: number) => Promise<void>
 }
@@ -22,12 +22,13 @@ export const TasksContextProvider: React.FC<TasksContextProviderProps> = ({child
         tasksService.fetchTasks().then((storedTasks) => {
           setTasks(storedTasks);
         });
-      });
+    }, []);
 
-    const createTask = async() => {
-        const newTask: Task = {id: 100, title: "Teste", description: "Teste", status: "todo", priority: "low"}
-
-        return newTask
+    const createTask = async(attributes: Omit<Task, "id">) => {
+       setTasks((currentState) => {
+        const updatedTasks = [...currentState,{id: 82, ...attributes}]
+        return updatedTasks
+       })
     }
 
     const updateTask = async(id: number, attributes: Partial<Omit<Task, "id">>) => {
