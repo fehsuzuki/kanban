@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@radix-ui/themes';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useState } from 'react';
 import { z } from 'zod';
 import { useTasks } from '../hooks/useTasks';
 
@@ -23,8 +23,10 @@ const CreateTaskSchema = z.object({
 
 export const CreateTaskForm: React.FC = () => {
   const {createTask} = useTasks()
+  const [open, setOpen] = useState(false)
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (ev) => {
+    setOpen(false)
     ev.preventDefault();
 
     const formData = new FormData(ev.currentTarget);
@@ -47,7 +49,7 @@ export const CreateTaskForm: React.FC = () => {
   };
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
         <Button style={{ cursor: 'pointer' }}>
           New Task <PlusIcon />
