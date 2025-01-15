@@ -50,20 +50,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   };
 
   const handleUpdate = (id: string) => {
-    const confirmation = confirm("Confirm to update this task")
-
     switch(task.status) {
       case "todo":
-        if(confirmation) {
-          updateTask(id, {status: "inprogress"})
-        }
-
+        updateTask(id, {status: "inprogress"})
         break
 
       case "inprogress":
-        if(confirmation) {
-          updateTask(id, {status: "done"})
-        }
+        updateTask(id, {status: "done"})
         break
     }
   }

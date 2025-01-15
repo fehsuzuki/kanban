@@ -28,10 +28,10 @@ export const AlertButton: React.FC<AlertButtonProps> = ({id}) => {
 				</AlertDialog.Description>
 				<Flex justify={"end"} gap={"4"}>
 					<AlertDialog.Cancel>
-						<Button>Cancel</Button>
+						<Button color="gray" style={{cursor:"pointer"}}>Cancel</Button>
 					</AlertDialog.Cancel>
 					<AlertDialog.Action>
-						<Button onClick={() => handleDelete(id)}>Delete task</Button>
+						<Button color="red" style={{cursor:"pointer"}} onClick={() => handleDelete(id)}>Delete task</Button>
 					</AlertDialog.Action>
 				</Flex>
 			</AlertDialog.Content>

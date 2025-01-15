@@ -11,7 +11,7 @@
       "id": "2",
       "title": "Reunião com a equipe",
       "description": "Reunião para discutir o progresso do projeto e próximos passos.",
-      "status": "todo",
+      "status": "inprogress",
       "priority": "low"
     },
     {
@@ -22,11 +22,11 @@
       "priority": "medium"
     },
     {
-      "id": "fadc",
-      "title": "teste",
-      "description": "teste",
-      "status": "inprogress",
-      "priority": "medium"
+      "id": "11ee",
+      "title": "t1",
+      "description": "t1",
+      "status": "todo",
+      "priority": "low"
     }
   ]
 }
