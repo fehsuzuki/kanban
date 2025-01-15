@@ -9,8 +9,8 @@ import {
 } from '@radix-ui/themes';
 import { Task, TaskPriority, TaskStatus } from '../entities/Task';
 import { useTasks } from '../hooks/useTasks';
-import { Pencil2Icon } from '@radix-ui/react-icons';
 import { AlertButton } from './AlertButton';
+import { UpdateTaskForm } from './updateTaskForm';
 
 interface TaskCardProps {
   task: Task;
@@ -70,7 +70,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           </Heading>
           <Badge color={getPriorityColor(task.priority)}>{task.priority}</Badge>
         </Flex>
-        <Pencil2Icon style={{cursor:"pointer"}}></Pencil2Icon>
+        <UpdateTaskForm/>
       </Flex>
 
       <Box mt="4">
