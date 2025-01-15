@@ -21,7 +21,7 @@ export const TaskBoard: React.FC = () => {
           <Badge size="3" color="gray">
             <Flex direction={"row"} justify={"between"} align={"center"} width={"100%"}>
               To do ({tasksTodo.length})
-              <CreateTaskForm/>
+              <CreateTaskForm status="todo"/>
             </Flex>
           </Badge>
           {tasksTodo.map((task) => (
@@ -33,7 +33,7 @@ export const TaskBoard: React.FC = () => {
           <Badge size="3" color="yellow">
             <Flex direction={"row"} justify={"between"} align={"center"} width={"100%"}>
               In progress ({tasksInProgress.length})
-              <CreateTaskForm />
+              <CreateTaskForm status="inprogress"/>
             </Flex>
           </Badge>
           {tasksInProgress.map((task) => (
@@ -45,7 +45,7 @@ export const TaskBoard: React.FC = () => {
           <Badge size="3" color="green">
             <Flex direction={"row"} justify={"between"} align={"center"} width={"100%"}>
               Done ({tasksDone.length})
-              <CreateTaskForm />
+              <CreateTaskForm status="done"/>
             </Flex>
           </Badge>
           {tasksDone.map((task) => (

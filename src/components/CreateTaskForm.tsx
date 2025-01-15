@@ -21,7 +21,11 @@ const CreateTaskSchema = z.object({
   priority: z.enum(['low', 'medium', 'high']),
 });
 
-export const CreateTaskForm: React.FC = () => {
+interface CreateTaskFormProps {
+  status: string
+}
+
+export const CreateTaskForm: React.FC<CreateTaskFormProps> = ({status}) => {
   const {createTask} = useTasks()
   const [open, setOpen] = useState(false)
 
@@ -33,7 +37,6 @@ export const CreateTaskForm: React.FC = () => {
 
     const title = formData.get('title');
     const description = formData.get('description');
-    const status = formData.get('status');
     const priority = formData.get('priority');
 
     ev.currentTarget.reset();
@@ -90,23 +93,7 @@ export const CreateTaskForm: React.FC = () => {
                 required
               />
             </Box>
-            <Flex gap="9" justify="center" mb="4">
-              <Box>
-                <Text as="div" mb="2">
-                  Status
-                </Text>
-                <RadioGroup.Root name="status" defaultValue="todo">
-                  <RadioGroup.Item value="todo">
-                    <Badge color="gray">To do</Badge>
-                  </RadioGroup.Item>
-                  <RadioGroup.Item value="inprogress">
-                    <Badge color="yellow">In progress</Badge>
-                  </RadioGroup.Item>
-                  <RadioGroup.Item value="done">
-                    <Badge color="green">Done</Badge>
-                  </RadioGroup.Item>
-                </RadioGroup.Root>
-              </Box>
+            <Flex mb="4">
               <Box>
                 <Text as="div" mb="2">
                   Priority
