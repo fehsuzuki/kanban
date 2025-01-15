@@ -10,13 +10,14 @@ import {
 import { Task, TaskPriority, TaskStatus } from '../entities/Task';
 import { useTasks } from '../hooks/useTasks';
 import { Pencil2Icon } from '@radix-ui/react-icons';
+import { AlertButton } from './AlertButton';
 
 interface TaskCardProps {
   task: Task;
 }
 
 export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
-  const {deleteTask, updateTask} = useTasks()
+  const {updateTask} = useTasks()
 
   const getPriorityColor = (priority: TaskPriority) => {
     const priorityColors: { [key: string]: 'sky' | 'amber' | 'tomato' } = {
@@ -47,14 +48,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
     return actionColors[status];
   };
-
-  const handleDelete = (id: string) => {
-    const confirmation = confirm("Confirm to delete this task")
-
-    if(confirmation) {
-      deleteTask(id)
-    }
-  }
 
   const handleUpdate = (id: string) => {
     const confirmation = confirm("Confirm to update this task")
@@ -101,9 +94,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
             {getActionText(task.status)}
           </Button>
         )}
-        <Button color="red" style={{ cursor: 'pointer' }} onClick={() => handleDelete(task.id)}>
-          Delete
-        </Button>
+        <AlertButton id={task.id}/>
       </Flex>
     </Card>
   );

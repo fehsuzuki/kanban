@@ -1,5 +1,4 @@
 import { Box, Flex, Heading } from '@radix-ui/themes';
-import { CreateTaskForm } from './components/CreateTaskForm';
 import { TaskBoard } from './components/TaskBoard';
 import { TasksContextProvider } from './contexts/TasksContext';
 

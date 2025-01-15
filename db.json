@@ -27,27 +27,6 @@
       "description": "teste",
       "status": "inprogress",
       "priority": "medium"
-    },
-    {
-      "id": "3860",
-      "title": "teste1",
-      "description": "teste1",
-      "status": "todo",
-      "priority": "medium"
-    },
-    {
-      "id": "8638",
-      "title": "teste2",
-      "description": "t2",
-      "status": "inprogress",
-      "priority": "low"
-    },
-    {
-      "id": "2c00",
-      "title": "t3",
-      "description": "t3",
-      "status": "done",
-      "priority": "high"
     }
   ]
 }
