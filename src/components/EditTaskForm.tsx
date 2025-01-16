@@ -11,14 +11,16 @@ const CreateTaskSchema = z.object({
    priority: z.enum(['low', 'medium', 'high']),
  });
 
-interface UpdateTaskFormProps {
-   title: string,
-   description: string,
-   priority: string
+interface EditTaskFormProps {
+  id: string,
+  title: string,
+  description: string,
+  status: string,
+  priority: string
 }
 
-export const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({title, description, priority}) => {
-   const {createTask} = useTasks()
+export const EditTaskForm: React.FC<EditTaskFormProps> = ({id, title, description, status, priority}) => {
+   const {editTask} = useTasks()
    const [open, setOpen] = useState(false)
    
    const handleSubmit: FormEventHandler<HTMLFormElement> = async (ev) => {
@@ -36,10 +38,13 @@ export const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({title, descriptio
       const taskData = CreateTaskSchema.parse({
       title,
       description,
+      status,
       priority,
       });
 
-      await createTask(taskData)
+      await editTask(id, taskData)
+
+      console.log("teste")
    };
 
    return (
@@ -49,9 +54,9 @@ export const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({title, descriptio
         </Dialog.Trigger>
   
         <Dialog.Content maxWidth="32rem">
-          <Dialog.Title>New Task</Dialog.Title>
+          <Dialog.Title>Edit task</Dialog.Title>
   
-          <Dialog.Description>Add new tasks to the board</Dialog.Description>
+          <Dialog.Description>Change the task properties</Dialog.Description>
   
           <form onSubmit={handleSubmit}>
             <Flex direction="column" gap="5">
@@ -67,7 +72,9 @@ export const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({title, descriptio
                   id="title"
                   autoFocus
                   required
-                />
+                  defaultValue={title}
+                >
+                </TextField.Root>
               </Box>
               <Box maxWidth="32rem">
                 <Box mb="2">
@@ -80,6 +87,7 @@ export const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({title, descriptio
                   name="description"
                   id="description"
                   required
+                  defaultValue={description}
                 />
               </Box>
               <Flex mb="4">
@@ -87,7 +95,7 @@ export const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({title, descriptio
                   <Text as="div" mb="2">
                     Priority
                   </Text>
-                  <RadioGroup.Root name="priority" defaultValue="low">
+                  <RadioGroup.Root name="priority" defaultValue={priority}>
                     <RadioGroup.Item value="low">
                       <Badge color="sky">Low</Badge>
                     </RadioGroup.Item>
@@ -107,7 +115,7 @@ export const UpdateTaskForm: React.FC<UpdateTaskFormProps> = ({title, descriptio
                   </Button>
                 </Dialog.Close>
                 <Button type="submit" color="green" style={{ cursor: 'pointer' }}>
-                  Create
+                  Update
                 </Button>
               </Flex>
             </Flex>

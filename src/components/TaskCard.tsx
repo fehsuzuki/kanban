@@ -10,7 +10,7 @@ import {
 import { Task, TaskPriority, TaskStatus } from '../entities/Task';
 import { useTasks } from '../hooks/useTasks';
 import { AlertButton } from './AlertButton';
-import { UpdateTaskForm } from './updateTaskForm';
+import { EditTaskForm } from './EditTaskForm';
 
 interface TaskCardProps {
   task: Task;
@@ -70,7 +70,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           </Heading>
           <Badge color={getPriorityColor(task.priority)}>{task.priority}</Badge>
         </Flex>
-        <UpdateTaskForm/>
+        <EditTaskForm 
+        id={task.id} 
+        title={task.title} 
+        description={task.description} 
+        status={task.status}
+        priority={task.priority}
+        />
       </Flex>
 
       <Box mt="4">

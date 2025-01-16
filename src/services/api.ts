@@ -39,5 +39,19 @@ export const tasksService = {
     await fetch(`${import.meta.env.VITE_API_URL}/tasks/${id}`, {
       method: "DELETE"
     })
+  },
+
+  async editTask(id: string, attributes: Partial<Omit<Task, "id">>): Promise<void> {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(attributes)
+    })
+
+    const updatedTask = await response.json()
+
+    return updatedTask
   }
 };

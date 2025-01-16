@@ -7,6 +7,7 @@ export interface TasksContextData {
     createTask: (attributes: Omit<Task, "id">) => Promise<void>
     updateTask: (id: string, attributes: Partial<Omit<Task, "id">>) => Promise<void>
     deleteTask: (id: string) => Promise<void>
+    editTask: (id: string, attributes: Partial<Omit<Task, "id">>) => Promise<void>
 }
 
 export const TasksContext = createContext({} as TasksContextData)
@@ -46,9 +47,20 @@ export const TasksContextProvider: React.FC<TasksContextProviderProps> = ({child
 
         setTasks((currentState) => currentState.filter((task) => task.id !== id))
     }
+
+    const editTask = async(id: string, attributes: Partial<Omit<Task, "id">>) => {
+        await tasksService.editTask(id, attributes)
+
+        setTasks((currentState) => {
+            const updatedTasks = [...currentState]
+            const taskIndex = updatedTasks.findIndex((task) => task.id === id)
+            Object.assign(updatedTasks[taskIndex], attributes)
+            return updatedTasks
+        })
+    }
     
     return(
-        <TasksContext.Provider value={{tasks, createTask, updateTask, deleteTask}}>
+        <TasksContext.Provider value={{tasks, createTask, updateTask, deleteTask, editTask}}>
             {children}
         </TasksContext.Provider>
     )
